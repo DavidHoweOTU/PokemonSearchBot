@@ -1,6 +1,6 @@
 package com.example.chatbot;
 
-public class ChatbotServerApplication {
+public class ServerApplication {
     public static void main(String[] args) {
 
     }
