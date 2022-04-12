@@ -20,6 +20,7 @@ The project is split up into _ major files with a CSV file stored in the resourc
 
 ### Resources 
 
-CSV File: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6 
+CSV File: 
+https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6 
 
 https://docs.oracle.com/javafx/2/ui_controls/choice-box.htm 
