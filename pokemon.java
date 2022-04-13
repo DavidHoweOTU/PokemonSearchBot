@@ -78,7 +78,7 @@ public class pokemon {
 
 
 
-        //the stuff the user will select on the interface
+        //stuff the user will select on the UI
         //using for testing right now
         String user_type = "Fire";
         String user_generation = "1";
