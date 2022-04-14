@@ -42,9 +42,6 @@ public class ClientApplication extends Application {
             "Fairy"
     );
 
-    public final Pokemon testPokemon = new Pokemon("Charizard", "Fire", "Flying", "1", "False", "78", "84", "78", "109", "85", "100", "534");
-
-
 
     public Scene generateSearchScene() {
         HBox root = new HBox();
@@ -80,6 +77,7 @@ public class ClientApplication extends Application {
         searchButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                // TODO - Get filtered entries from server
                 // TODO - Update ListView with filtered entries
             }
         });
