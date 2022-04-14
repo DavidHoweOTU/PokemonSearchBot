@@ -1,7 +1,9 @@
+package com.example.chatbot;
+
 import java.util.*;
 import java.io.*;
 
-public class pokemon {
+public class Pokemon {
     public static ArrayList<Integer> pokemon_legendary_finder(ArrayList<String> arr, String legendary){
         ArrayList<Integer> newls = new ArrayList<Integer>();
         for (int i = 0; i < arr.size(); i++){
