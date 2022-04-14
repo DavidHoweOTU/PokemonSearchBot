@@ -105,7 +105,12 @@ public class ClientApplication extends Application {
 
     public Scene generateDataScene() {
         // TODO - Format data scene
-        return new Scene(new VBox(), windowWidth, windowHeight);
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10));
+
+        TextField pokemonName = new TextField();
+
+        return new Scene(vBox, windowWidth, windowHeight);
     }
 
 
