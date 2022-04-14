@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientApplication extends Application {
-
     private final int windowHeight = 600;
     private final int windowWidth  = 600;
 
@@ -108,7 +107,6 @@ public class ClientApplication extends Application {
     }
 
     public Scene generateDataScene(Pokemon p) {
-        // TODO - Format data scene
         VBox root = new VBox();
         root.setPadding(new Insets(10));
 
@@ -183,8 +181,8 @@ public class ClientApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
         Scene scene = generateSearchScene();
-//        Scene scene = generateDataScene(testPokemon);
         stage.setTitle("Pokémon Search Bot");
         stage.setScene(scene);
         stage.show();
