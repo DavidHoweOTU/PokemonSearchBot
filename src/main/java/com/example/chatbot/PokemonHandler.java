@@ -22,7 +22,7 @@ public class PokemonHandler {
             String line;
             BufferedReader br = new BufferedReader(new FileReader("pokemon.csv"));
 
-            //initializing lists for values in csv
+            // initializing lists for values in csv
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 pokemon_name.add(values[1]);
@@ -94,17 +94,17 @@ public class PokemonHandler {
     }
 
     public ArrayList<Integer> getArrayIndices(String user_type, String user_generation, String user_legendary, String user_name) {
-        //indexes of the pokemon that match what the user is looking for
+        // indexes of the pokemon that match what the user is looking for
         ArrayList<Integer> pokemon_indexes = pokemon_type_finder(pokemon_type, user_type);
         ArrayList<Integer> pokemon_indexes2 = pokemon_generation_finder(pokemon_generation, user_generation);
         ArrayList<Integer> pokemon_indexes3 = pokemon_legendary_finder(pokemon_legendary, user_legendary);
         ArrayList<Integer> pokemon_indexes4 = pokemon_name_finder(pokemon_name, user_name);
 
-        //compares lists of pokemon and returns matches
+        // compares lists of pokemon and returns matches
         ArrayList<Integer> index_1_2 = index_compare(pokemon_indexes,pokemon_indexes2);
         ArrayList<Integer> index_3_4 = index_compare(pokemon_indexes3, pokemon_indexes4);
 
-        //refines list to match the final list and returns all that match requirements
+        // refines list to match the final list and returns all that match requirements
         return index_compare(index_1_2, index_3_4);
     }
 

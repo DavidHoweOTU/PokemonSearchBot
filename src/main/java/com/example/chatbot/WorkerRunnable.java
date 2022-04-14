@@ -7,12 +7,9 @@ import java.util.ArrayList;
 
 public class WorkerRunnable implements Runnable {
 
-    protected Socket             s           = null;
-    protected ArrayList<Integer> pokemonList = null;
-
-    public WorkerRunnable(Socket s, ArrayList<Integer> pokemonList) {
+    protected Socket s = null;
+    public WorkerRunnable(Socket s) {
         this.s = s;
-        this.pokemonList = pokemonList;
     }
 
     @Override
@@ -21,11 +18,11 @@ public class WorkerRunnable implements Runnable {
             DataInputStream dis = new DataInputStream(s.getInputStream());
             String input = dis.readUTF();
 
-            // Get new pokemon from index given
+            // Get new Pokemon from index given
             try {
                 int index = Integer.parseInt(input);
+                Pokemon newPokemon = ServerApplication.ph.getPokemon(index);
                 // TODO - Send message with Pokemon corresponding to index number
-                // ServerApplication.ph.getPokemon(index);
 
             }
             // Provide arrays from information
@@ -33,6 +30,7 @@ public class WorkerRunnable implements Runnable {
                 // Name array
                 if (!ServerApplication.started) {
                     // TODO - Send array of Pokemon names
+
                     ServerApplication.started = true;
                 }
                 // Filtered indices

@@ -30,8 +30,8 @@ public class ServerHandler implements Runnable {
                 System.out.println("ERROR: Could not accept client connection");
             }
 
-            // TODO - process requests with new runnable
-//            new Thread(...)
+            // process requests with new runnable
+            new Thread(new WorkerRunnable(s)).start();
         }
     }
 
