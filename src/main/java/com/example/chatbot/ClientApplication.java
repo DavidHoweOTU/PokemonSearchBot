@@ -46,15 +46,16 @@ public class ClientApplication extends Application {
     public static ArrayList<String> originalPokemonList;
     public static ArrayList<String> filteredPokemonList;
 
+    public static ListView<String> listOfPokemon;
+
     public static Scene generateSearchScene() {
         HBox root = new HBox();
 
-        ListView<String> listOfPokemon = new ListView<>();
+        listOfPokemon = new ListView<>();
 
         // Load pokemon names
         ch = new ClientHandler(0, "AAAA");
         new Thread(ch).start();
-        listOfPokemon.setItems((ObservableList<String>) originalPokemonList);
 
         listOfPokemon.setOnMouseClicked(event -> {
             String name = listOfPokemon.getSelectionModel().getSelectedItem();
@@ -87,7 +88,6 @@ public class ClientApplication extends Application {
                             + pokemonName.getText();
             ch = new ClientHandler(1, filters);
             new Thread(ch).start();
-            listOfPokemon.setItems((ObservableList<String>) filteredPokemonList);
         });
 
         Button exitButton = new Button("Exit");

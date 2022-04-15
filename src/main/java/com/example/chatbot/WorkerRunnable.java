@@ -21,6 +21,8 @@ public class WorkerRunnable implements Runnable {
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
             String input = dis.readUTF();
 
+            System.out.println(input);
+            System.out.println(input.split(",")[0]);
 
             // Name array
             if (!ServerApplication.started) {
@@ -28,7 +30,7 @@ public class WorkerRunnable implements Runnable {
                 ServerApplication.started = true;
             }
             // Filtered indices
-            else if (Objects.equals(input.split(",")[0], input)) {
+            else if (!Objects.equals(input.split(",")[0], input)) {
                 String[] filterContents = input.split(",");
                 sendFilteredIndices(oos, filterContents);
             }

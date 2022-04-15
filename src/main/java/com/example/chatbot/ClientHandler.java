@@ -1,6 +1,7 @@
 package com.example.chatbot;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 
 import java.io.DataOutputStream;
@@ -49,6 +50,9 @@ public class ClientHandler implements Runnable {
     private static void getPokemonNameList() {
         try {
             ClientApplication.originalPokemonList = (ArrayList<String>) ois.readObject();
+            ClientApplication.listOfPokemon.setItems(FXCollections.observableArrayList(
+                    ClientApplication.originalPokemonList
+            ));
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }
@@ -62,6 +66,9 @@ public class ClientHandler implements Runnable {
                 filteredList.add(ClientApplication.originalPokemonList.get(index));
             }
             ClientApplication.filteredPokemonList = filteredList;
+            ClientApplication.listOfPokemon.setItems(FXCollections.observableArrayList(
+                    ClientApplication.filteredPokemonList
+            ));
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }

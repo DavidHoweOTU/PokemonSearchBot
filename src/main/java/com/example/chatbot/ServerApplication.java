@@ -13,7 +13,7 @@ public class ServerApplication extends Application {
     private Scene loadScene() {
         Button button = new Button("End Communications");
         button.setOnMouseClicked(event -> sh.endCommunications());
-        return new Scene(button);
+        return new Scene(button, 400, 400);
     }
 
     @Override
