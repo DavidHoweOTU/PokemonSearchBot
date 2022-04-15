@@ -4,7 +4,9 @@
 
 For our final project, our group decided to channel our inner childhood and create a Pokémon search bot. This bot allows you to access all of the necessary information about particular Pokémon through various search parameters. The information displayed includes their National Pokédex number, their typings, as well as all of their stats. Shown below is a screenshot of the Menu system, as well as the search results page. Once you find the Pokémon you are looking for, you can click on its name to find its stats and typing. 
 
-<img src="/" alt="Screenshot of Application">
+<img src="/PokemonBot1.png" alt="Screenshot of Application">
+
+<img src="/PokemonBot2.png" alt="Screenshot of Application">
 
 ## Running the Program 
 
