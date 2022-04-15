@@ -1,9 +1,13 @@
 package com.example.chatbot;
 
+import javafx.application.Platform;
+import javafx.scene.Scene;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private final int               port = 6666;
@@ -30,11 +34,12 @@ public class ClientHandler implements Runnable {
             switch (taskID) {
                 case 0 -> getPokemonNameList();
                 case 1 -> getFilteredIndices();
-                case 2 -> getPokemonFromIndex();
+                case 2 -> getPokemonFromName();
             }
         }
         catch (IOException e) { e.printStackTrace(); }
     }
+
 
     private void sendMessage() {
         try { dos.writeUTF(this.message); }
@@ -42,14 +47,41 @@ public class ClientHandler implements Runnable {
     }
 
     private static void getPokemonNameList() {
-        // TODO - Handle pokemon list
+        try {
+            ArrayList<String> pokemonNames = (ArrayList<String>) ois.readObject();
+        }
+        catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
+        // TODO - Save the pokemon names somewhere
     }
 
     private static void getFilteredIndices() {
-        // TODO - Handle filtered list of indices
+        try {
+            ArrayList<Integer> newIndices = (ArrayList<Integer>) ois.readObject();
+        }
+        catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
+        // TODO - Filter pokemon name list to only include filtered names, then update scene
     }
 
-    private static void getPokemonFromIndex() {
-        // TODO - Handle Pokemon object
+    private static void getPokemonFromName() {
+        try {
+            Pokemon newPokemon = (Pokemon) ois.readObject();
+            Scene newScene = ClientApplication.generateDataScene(newPokemon);
+            // TODO - Update scene with new Pokemon
+        }
+        catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
+    }
+
+
+    public void endCommunications() {
+        // close sockets
+        try {
+            dos.close();
+            ois.close();
+            s.close();
+        }
+        catch (IOException e) { e.printStackTrace(); }
+
+        // close program
+        Platform.exit();
     }
 }

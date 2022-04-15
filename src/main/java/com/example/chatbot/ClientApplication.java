@@ -15,12 +15,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientApplication extends Application {
-    ClientHandler ch = null;
+    static ClientHandler ch = null;
 
-    private final int windowHeight = 600;
-    private final int windowWidth  = 600;
+    private static final int windowHeight = 600;
+    private static final int windowWidth  = 600;
 
-    private final ObservableList<String> types = FXCollections.observableArrayList(
+    private static final ObservableList<String> types = FXCollections.observableArrayList(
             "Any Type",
             "Normal",
             "Fire",
@@ -43,13 +43,15 @@ public class ClientApplication extends Application {
     );
 
 
-    public Scene generateSearchScene() {
+    public static Scene generateSearchScene() {
         HBox root = new HBox();
 
         ListView<String> listOfPokemon = new ListView<>();
         listOfPokemon.setOnMouseClicked(event -> {
-            // TODO - Switch to new scene when ListItem clicked
-            // listView.getSelectionModel().getSelectedItem()
+            String name = listOfPokemon.getSelectionModel().getSelectedItem();
+            ch = new ClientHandler(2, name);
+            Thread th = new Thread(ch);
+            th.start();
         });
 
         VBox vBox = new VBox();
@@ -77,14 +79,11 @@ public class ClientApplication extends Application {
             ch = new ClientHandler(1, filters);
             Thread th = new Thread(ch);
             th.start();
-
-            // TODO - Get filtered entries from server
-            // TODO - Update ListView with filtered entries
         });
 
         Button exitButton = new Button("Exit");
         exitButton.setOnMouseClicked(event -> {
-            // TODO - Safely close client socket and end program
+            ch.endCommunications();
         });
 
         // Arrange items in scene
@@ -100,7 +99,7 @@ public class ClientApplication extends Application {
         return new Scene(root, windowWidth, windowHeight);
     }
 
-    public Scene generateDataScene(Pokemon p) {
+    public static Scene generateDataScene(Pokemon p) {
         VBox root = new VBox();
         root.setPadding(new Insets(10));
 
@@ -133,6 +132,7 @@ public class ClientApplication extends Application {
         Label total = new Label("Total:");
         Label pTotal = new Label(p.total());
         Button backButton = new Button("Back");
+
         backButton.setOnMouseClicked(event -> {
             // TODO - Return to the first scene
         });
@@ -143,16 +143,18 @@ public class ClientApplication extends Application {
         gridPane.add(def,   0, 2);
         gridPane.add(spa,   0, 3);
         gridPane.add(spd,   0, 4);
-        gridPane.add(total, 0, 5);
+        gridPane.add(spe,   0, 5);
+        gridPane.add(total, 0, 6);
 
-        gridPane.add(backButton, 0, 6);
+        gridPane.add(backButton, 0, 7);
 
         gridPane.add(pHp,    1, 0);
         gridPane.add(pAtk,   1, 1);
         gridPane.add(pDef,   1, 2);
         gridPane.add(pSpa,   1, 3);
         gridPane.add(pSpd,   1, 4);
-        gridPane.add(pTotal, 1, 5);
+        gridPane.add(pSpe,   1, 5);
+        gridPane.add(pTotal, 1, 6);
 
         // add items to root
         root.getChildren().add(pName);

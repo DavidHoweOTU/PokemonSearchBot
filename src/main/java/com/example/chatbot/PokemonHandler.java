@@ -108,7 +108,9 @@ public class PokemonHandler {
         return index_compare(index_1_2, index_3_4);
     }
 
-    public Pokemon getPokemon(int index) {
+    public Pokemon getPokemon(String pokemonName) {
+        int index = pokemon_name.indexOf(pokemonName);
+
         return new Pokemon(
                 pokemon_name.get(index),
                 pokemon_type.get(index),
