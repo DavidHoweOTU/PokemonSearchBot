@@ -86,8 +86,8 @@ public class ClientApplication extends Application {
                             + legendsOnly.isSelected() + ","
                             + pokemonName.getText();
             ch = new ClientHandler(1, filters);
-            Thread th = new Thread(ch);
-            th.start();
+            new Thread(ch).start();
+            listOfPokemon.setItems((ObservableList<String>) filteredPokemonList);
         });
 
         Button exitButton = new Button("Exit");

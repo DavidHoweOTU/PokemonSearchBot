@@ -56,11 +56,14 @@ public class ClientHandler implements Runnable {
     private static void getFilteredIndices() {
         try {
             ArrayList<Integer> newIndices = (ArrayList<Integer>) ois.readObject();
+
+            ArrayList<String> filteredList = new ArrayList<>();
+            for (int index : newIndices) {
+                filteredList.add(ClientApplication.originalPokemonList.get(index));
+            }
+            ClientApplication.filteredPokemonList = filteredList;
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
-
-
-        // TODO - Filter pokemon name list to only include filtered names, then update scene
     }
 
     private static void getPokemonFromName() {
