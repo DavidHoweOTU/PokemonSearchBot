@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class WorkerRunnable implements Runnable {
 
-    protected Socket s = null;
+    protected Socket s;
     public WorkerRunnable(Socket s) {
         this.s = s;
     }

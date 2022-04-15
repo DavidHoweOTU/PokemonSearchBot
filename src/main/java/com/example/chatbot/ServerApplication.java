@@ -14,13 +14,7 @@ public class ServerApplication extends Application {
 
     private Scene loadScene() {
         Button button = new Button("End Communications");
-        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                sh.endCommunications();
-            }
-        });
-
+        button.setOnMouseClicked(event -> sh.endCommunications());
         return new Scene(button);
     }
 

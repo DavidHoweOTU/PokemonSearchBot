@@ -3,11 +3,9 @@ package com.example.chatbot;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientApplication extends Application {
+    ClientHandler ch = null;
+
     private final int windowHeight = 600;
     private final int windowWidth  = 600;
 
@@ -47,12 +47,9 @@ public class ClientApplication extends Application {
         HBox root = new HBox();
 
         ListView<String> listOfPokemon = new ListView<>();
-        listOfPokemon.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // TODO - Switch to new scene when ListItem clicked
-                // listView.getSelectionModel().getSelectedItem()
-            }
+        listOfPokemon.setOnMouseClicked(event -> {
+            // TODO - Switch to new scene when ListItem clicked
+            // listView.getSelectionModel().getSelectedItem()
         });
 
         VBox vBox = new VBox();
@@ -62,40 +59,39 @@ public class ClientApplication extends Application {
         TextField pokemonName = new TextField();
         pokemonName.setPromptText("Pokémon Name");
 
-        ChoiceBox<String> type1 = new ChoiceBox<>(types);
-        ChoiceBox<String> type2 = new ChoiceBox<>(types);
+        ChoiceBox<String> type = new ChoiceBox<>(types);
         ChoiceBox<String> generation = new ChoiceBox<>(
                 FXCollections.observableArrayList("Any Generation", "1", "2", "3", "4", "5", "6")
         );
-        type1.setTooltip(new Tooltip("First type filter"));
-        type2.setTooltip(new Tooltip("Second type filter"));
+        type.setTooltip(new Tooltip("Type filter"));
         generation.setTooltip(new Tooltip("Generation filter"));
 
         CheckBox legendsOnly = new CheckBox("Legendaries Only");
 
         Button searchButton = new Button("Search");
-        searchButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // TODO - Get filtered entries from server
-                // TODO - Update ListView with filtered entries
-            }
+        searchButton.setOnMouseClicked(event -> {
+            String filters = type.getValue() + ","
+                            + generation.getValue() + ","
+                            + legendsOnly.isSelected() + ","
+                            + pokemonName.getText();
+            ch = new ClientHandler(1, filters);
+            Thread th = new Thread(ch);
+            th.start();
+
+            // TODO - Get filtered entries from server
+            // TODO - Update ListView with filtered entries
         });
 
         Button exitButton = new Button("Exit");
-        exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // TODO - Safely close client socket and end program
-            }
+        exitButton.setOnMouseClicked(event -> {
+            // TODO - Safely close client socket and end program
         });
 
         // Arrange items in scene
         root.getChildren().add(listOfPokemon);
         root.getChildren().add(vBox);
         vBox.getChildren().add(pokemonName);
-        vBox.getChildren().add(type1);
-        vBox.getChildren().add(type2);
+        vBox.getChildren().add(type);
         vBox.getChildren().add(generation);
         vBox.getChildren().add(legendsOnly);
         vBox.getChildren().add(searchButton);
@@ -137,11 +133,8 @@ public class ClientApplication extends Application {
         Label total = new Label("Total:");
         Label pTotal = new Label(p.total());
         Button backButton = new Button("Back");
-        backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // TODO - Return to the first scene
-            }
+        backButton.setOnMouseClicked(event -> {
+            // TODO - Return to the first scene
         });
 
         // add items to gridPane

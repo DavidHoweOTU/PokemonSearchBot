@@ -14,7 +14,7 @@ public class ClientHandler implements Runnable {
     public int taskID;
     public String message;
 
-    public ClientHandler(String message) {
+    public ClientHandler(int taskID, String message) {
         this.taskID = taskID;
         this.message = message;
     }
