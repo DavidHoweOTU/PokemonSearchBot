@@ -3,12 +3,15 @@ package com.example.chatbot;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+
+import static com.example.chatbot.ClientApplication.currentScene;
 
 public class ClientHandler implements Runnable {
     private final int               port = 6666;
@@ -76,9 +79,24 @@ public class ClientHandler implements Runnable {
 
     private static void getPokemonFromName() {
         try {
-            Pokemon newPokemon = (Pokemon) ois.readObject();
+            String[] pokedata = ((String) ois.readObject()).split(",");
+            Pokemon newPokemon = new Pokemon(
+                    pokedata[0],
+                    pokedata[1],
+                    pokedata[2],
+                    pokedata[3],
+                    pokedata[4],
+                    pokedata[5],
+                    pokedata[6],
+                    pokedata[7],
+                    pokedata[8],
+                    pokedata[9],
+                    pokedata[10],
+                    pokedata[11]
+            );
             Scene newScene = ClientApplication.generateDataScene(newPokemon);
-            // TODO - Replace scene with new Pokemon information
+            ((Stage) currentScene.getWindow()).setScene(newScene);
+            currentScene = newScene;
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }

@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ClientApplication extends Application {
     static ClientHandler ch = null;
@@ -50,6 +49,8 @@ public class ClientApplication extends Application {
 
     public static ListView<String> listOfPokemon;
 
+    public static Scene currentScene;
+
     public static Scene generateSearchScene() {
         HBox root = new HBox();
 
@@ -62,8 +63,7 @@ public class ClientApplication extends Application {
         listOfPokemon.setOnMouseClicked(event -> {
             String name = listOfPokemon.getSelectionModel().getSelectedItem();
             ch = new ClientHandler(2, name);
-            Thread th = new Thread(ch);
-            th.start();
+            Platform.runLater(ch);
         });
 
         VBox vBox = new VBox();
@@ -189,9 +189,9 @@ public class ClientApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         // Create scene
-        Scene scene = generateSearchScene();
+        currentScene = generateSearchScene();
         stage.setTitle("Pokémon Search Bot");
-        stage.setScene(scene);
+        stage.setScene(currentScene);
         stage.show();
     }
 

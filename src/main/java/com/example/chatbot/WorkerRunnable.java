@@ -44,7 +44,19 @@ public class WorkerRunnable implements Runnable {
 
     private void sendPokemonData(ObjectOutputStream oos, String name) throws IOException {
         Pokemon newPokemon = ServerApplication.ph.getPokemon(name);
-        oos.writeObject(newPokemon);
+        String pokedata = newPokemon.name() + ","
+                + newPokemon.type1() + ","
+                + newPokemon.type2() + ","
+                + newPokemon.generation() + ","
+                + newPokemon.isLegendary() + ","
+                + newPokemon.hp() + ","
+                + newPokemon.atk() + ","
+                + newPokemon.def() + ","
+                + newPokemon.spa() + ","
+                + newPokemon.spd() + ","
+                + newPokemon.spe() + ","
+                + newPokemon.total();
+        oos.writeObject(pokedata);
     }
 
     private void sendArrayOfPokemonNames(ObjectOutputStream oos) throws IOException {
