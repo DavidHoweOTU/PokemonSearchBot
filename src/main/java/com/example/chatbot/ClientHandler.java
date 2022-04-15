@@ -11,7 +11,8 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import static com.example.chatbot.ClientApplication.currentScene;
+import static com.example.chatbot.ClientApplication.scene1;
+import static com.example.chatbot.ClientApplication.scene2;
 
 public class ClientHandler implements Runnable {
     private final int               port = 6666;
@@ -95,8 +96,8 @@ public class ClientHandler implements Runnable {
                     pokedata[11]
             );
             Scene newScene = ClientApplication.generateDataScene(newPokemon);
-            ((Stage) currentScene.getWindow()).setScene(newScene);
-            currentScene = newScene;
+            ((Stage) scene1.getWindow()).setScene(newScene);
+            scene2 = newScene;
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }

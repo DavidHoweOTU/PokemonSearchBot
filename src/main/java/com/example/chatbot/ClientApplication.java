@@ -49,7 +49,8 @@ public class ClientApplication extends Application {
 
     public static ListView<String> listOfPokemon;
 
-    public static Scene currentScene;
+    public static Scene scene1;
+    public static Scene scene2;
 
     public static Scene generateSearchScene() {
         HBox root = new HBox();
@@ -147,7 +148,7 @@ public class ClientApplication extends Application {
         Button backButton = new Button("Back");
 
         backButton.setOnMouseClicked(event -> {
-            // TODO - Return to the first scene
+            ((Stage) scene2.getWindow()).setScene(scene1);
         });
 
         // add items to gridPane
@@ -189,9 +190,9 @@ public class ClientApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         // Create scene
-        currentScene = generateSearchScene();
+        scene1 = generateSearchScene();
         stage.setTitle("Pokémon Search Bot");
-        stage.setScene(currentScene);
+        stage.setScene(scene1);
         stage.show();
     }
 
