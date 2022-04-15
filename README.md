@@ -13,8 +13,11 @@ The application was created through Gradle and written in Java. The Java files c
 ### To run on your device:
 
 1. Clone the Github repository to your device
-2. 
-3. 
+2. Open the project in your prefered Java Editor (IntelliJ recommended)
+3. Run main() in ServerApplication.java
+4. Wait until the window with the button appears
+5. Run main() in ClientApplication.java
+6. The search window should appear in a few seconds
 
 ### Resources 
 
