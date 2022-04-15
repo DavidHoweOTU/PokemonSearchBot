@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.*;
 
 public class PokemonHandler {
+    private final String filePath = "src/main/resources/com/example/chatbot/pokemon.csv";
+
     public final ArrayList<String> pokemon_name         = new ArrayList<>();
     public final ArrayList<String> pokemon_type         = new ArrayList<>();
     public final ArrayList<String> pokemon_type2        = new ArrayList<>();
@@ -20,7 +22,7 @@ public class PokemonHandler {
     public PokemonHandler() {
         try {
             String line;
-            BufferedReader br = new BufferedReader(new FileReader("pokemon.csv"));
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
 
             // initializing lists for values in csv
             while ((line = br.readLine()) != null) {

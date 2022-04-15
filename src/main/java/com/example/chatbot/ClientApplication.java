@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ClientApplication extends Application {
     static ClientHandler ch = null;
@@ -42,11 +43,19 @@ public class ClientApplication extends Application {
             "Fairy"
     );
 
+    public static ArrayList<String> originalPokemonList;
+    public static ArrayList<String> filteredPokemonList;
 
     public static Scene generateSearchScene() {
         HBox root = new HBox();
 
         ListView<String> listOfPokemon = new ListView<>();
+
+        // Load pokemon names
+        ch = new ClientHandler(0, "AAAA");
+        new Thread(ch).start();
+        listOfPokemon.setItems((ObservableList<String>) originalPokemonList);
+
         listOfPokemon.setOnMouseClicked(event -> {
             String name = listOfPokemon.getSelectionModel().getSelectedItem();
             ch = new ClientHandler(2, name);
@@ -175,6 +184,7 @@ public class ClientApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        // Create scene
         Scene scene = generateSearchScene();
         stage.setTitle("Pokémon Search Bot");
         stage.setScene(scene);

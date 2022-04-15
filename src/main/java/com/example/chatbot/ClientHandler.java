@@ -48,10 +48,9 @@ public class ClientHandler implements Runnable {
 
     private static void getPokemonNameList() {
         try {
-            ArrayList<String> pokemonNames = (ArrayList<String>) ois.readObject();
+            ClientApplication.originalPokemonList = (ArrayList<String>) ois.readObject();
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
-        // TODO - Save the pokemon names somewhere
     }
 
     private static void getFilteredIndices() {
@@ -59,6 +58,8 @@ public class ClientHandler implements Runnable {
             ArrayList<Integer> newIndices = (ArrayList<Integer>) ois.readObject();
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
+
+
         // TODO - Filter pokemon name list to only include filtered names, then update scene
     }
 
@@ -66,7 +67,7 @@ public class ClientHandler implements Runnable {
         try {
             Pokemon newPokemon = (Pokemon) ois.readObject();
             Scene newScene = ClientApplication.generateDataScene(newPokemon);
-            // TODO - Update scene with new Pokemon
+            // TODO - Replace scene with new Pokemon information
         }
         catch (IOException | ClassNotFoundException e) { e.printStackTrace(); }
     }
