@@ -18,8 +18,8 @@ The application was created through Gradle and written in Java. The Java files c
 
 ### Resources 
 
-CSV File: 
+CSV File: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6 
 
-https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6 
+Java Resources: https://docs.oracle.com/javafx/2/ui_controls/choice-box.htm 
 
-https://docs.oracle.com/javafx/2/ui_controls/choice-box.htm 
+
