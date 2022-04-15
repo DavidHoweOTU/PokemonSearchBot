@@ -50,6 +50,7 @@ public class ClientHandler implements Runnable {
     private static void getPokemonNameList() {
         try {
             ClientApplication.originalPokemonList = (ArrayList<String>) ois.readObject();
+            ClientApplication.filteredPokemonList = ClientApplication.originalPokemonList;
             ClientApplication.listOfPokemon.setItems(FXCollections.observableArrayList(
                     ClientApplication.originalPokemonList
             ));
@@ -66,7 +67,7 @@ public class ClientHandler implements Runnable {
                 filteredList.add(ClientApplication.originalPokemonList.get(index));
             }
             ClientApplication.filteredPokemonList = filteredList;
-            ClientApplication.listOfPokemon.setItems(FXCollections.observableArrayList(
+            ClientApplication.listOfPokemon.getItems().setAll(FXCollections.observableArrayList(
                     ClientApplication.filteredPokemonList
             ));
         }

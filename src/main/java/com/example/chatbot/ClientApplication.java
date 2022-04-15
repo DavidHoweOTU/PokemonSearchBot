@@ -1,6 +1,7 @@
 package com.example.chatbot;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ClientApplication extends Application {
     static ClientHandler ch = null;
@@ -72,9 +74,11 @@ public class ClientApplication extends Application {
         pokemonName.setPromptText("Pokémon Name");
 
         ChoiceBox<String> type = new ChoiceBox<>(types);
+        type.getSelectionModel().selectFirst();
         ChoiceBox<String> generation = new ChoiceBox<>(
                 FXCollections.observableArrayList("Any Generation", "1", "2", "3", "4", "5", "6")
         );
+        generation.getSelectionModel().selectFirst();
         type.setTooltip(new Tooltip("Type filter"));
         generation.setTooltip(new Tooltip("Generation filter"));
 
@@ -87,7 +91,7 @@ public class ClientApplication extends Application {
                             + legendsOnly.isSelected() + ","
                             + pokemonName.getText();
             ch = new ClientHandler(1, filters);
-            new Thread(ch).start();
+            Platform.runLater(ch); //new Thread(ch).start();
         });
 
         Button exitButton = new Button("Exit");

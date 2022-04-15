@@ -31,7 +31,7 @@ public class WorkerRunnable implements Runnable {
             }
             // Filtered indices
             else if (!Objects.equals(input.split(",")[0], input)) {
-                String[] filterContents = input.split(",");
+                String[] filterContents = input.split(",", -1);
                 sendFilteredIndices(oos, filterContents);
             }
             // Get new Pokemon from index given
@@ -54,7 +54,7 @@ public class WorkerRunnable implements Runnable {
 
     private void sendFilteredIndices(ObjectOutputStream oos, String[] filterContents) throws IOException {
         ArrayList<Integer> filteredIndices = ServerApplication.ph.getArrayIndices(
-                filterContents[0], filterContents[1], filterContents[2], filterContents[3]
+                filterContents[0], filterContents[1], filterContents[2].toUpperCase(), filterContents[3]
         );
         oos.writeObject(filteredIndices);
     }

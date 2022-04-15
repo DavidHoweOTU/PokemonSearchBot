@@ -57,27 +57,46 @@ public class PokemonHandler {
     }
     public static ArrayList<Integer> pokemon_type_finder(ArrayList<String> arr, String type){
         ArrayList<Integer> newls = new ArrayList<>();
-        for (int i = 0; i < arr.size(); i++){
-            if(arr.get(i).equals(type)){
+        if (Objects.equals(type, "Any Type")) {
+            for (int i = 0; i < arr.size(); i++) {
                 newls.add(i);
+            }
+        } else {
+            for (int i = 0; i < arr.size(); i++){
+                if(arr.get(i).equals(type)){
+                    newls.add(i);
+                }
             }
         }
         return newls;
     }
     public static ArrayList<Integer> pokemon_generation_finder(ArrayList<String> arr, String generation){
         ArrayList<Integer> newls = new ArrayList<>();
-        for (int i = 0; i < arr.size(); i++){
-            if(arr.get(i).equals(generation)){
+        if (Objects.equals(generation, "Any Generation")) {
+            for (int i = 0; i < arr.size(); i++) {
                 newls.add(i);
+            }
+        } else {
+            for (int i = 0; i < arr.size(); i++) {
+                if (arr.get(i).equals(generation)) {
+                    newls.add(i);
+                }
             }
         }
         return newls;
     }
     public static ArrayList<Integer> pokemon_name_finder(ArrayList<String> arr, String pokemon) {
         ArrayList<Integer> newls = new ArrayList<>();
-        for (int i = 0; i < arr.size(); i++){
-            if(arr.get(i).contains(pokemon)){
+
+        if (Objects.equals(pokemon, "#")) {
+            for (int i = 0; i < arr.size(); i++) {
                 newls.add(i);
+            }
+        } else {
+            for (int i = 0; i < arr.size(); i++) {
+                if (arr.get(i).contains(pokemon)) {
+                    newls.add(i);
+                }
             }
         }
         return newls;
